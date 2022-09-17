@@ -18,22 +18,28 @@
         <h5 class="text-center text-muted font-weight-normal mb-4">Connectez vous</h5>
 
         <!-- Form -->
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
+            <ngb-alert *ngIf="errorMessage" type="dark-danger" dismissible="true">{{errorMessage}}</ngb-alert>
             <label class="form-label">Email</label>
-            <input [(ngModel)]="credentials.email" name="email" type="text" class="form-control">
+            <input formControlName="email" name="email" type="text" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+            <small *ngIf="submitted && f.email.errors && f.email.errors.required" class="invalid-feedback">Ce
+              champs est requis
+            </small>
           </div>
           <div class="form-group">
             <label class="form-label d-flex justify-content-between align-items-end">
               <div>Mot de passe</div>
             </label>
-            <input [(ngModel)]="credentials.password" name="password" type="password" class="form-control">
+            <input formControlName="password" name="password" type="password" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+            <small *ngIf="submitted && f.password.errors && f.password.errors.required" class="invalid-feedback">Ce
+              champs est requis
+            </small>
           </div>
           <div class="d-flex justify-content-between align-items-center m-0">
-            <label class="custom-control custom-checkbox m-0">
-              <input type="checkbox" class="custom-control-input" name="rememberMe" [(ngModel)]="credentials.rememberMe">
-            </label>
-            <button type="button" class="btn btn-primary">Se connecter</button>
+            <button type="submit" class="btn btn-primary" data-style="zoom-out">Se connecter</button>
           </div>
         </form>
         <!-- / Form -->

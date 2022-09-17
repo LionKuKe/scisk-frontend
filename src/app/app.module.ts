@@ -1,5 +1,5 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -34,6 +34,10 @@ import { AppService } from './app.service';
 import { LayoutModule } from './layout/layout.module';
 import { ThemeSettingsModule } from '../vendor/libs/theme-settings/theme-settings.module';
 import {LoginComponent} from './authentication/login/login.component';
+import {AuthenticationService} from './authentication/service/authentication.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {JwtHeaderInterceptor} from './authentication/interceptor/jwt.header.interceptor';
+import {HttpErrorInterceptor} from './authentication/interceptor/http.error.interceptor';
 
 // *******************************************************************************
 // Ngx-SweetAlert2
@@ -63,6 +67,7 @@ export async function provideSwal() {
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     NgbModule,
 
     // App
@@ -96,7 +101,13 @@ export async function provideSwal() {
 
   providers: [
     Title,
-    AppService
+    AppService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtHeaderInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+
+    {provide: LOCALE_ID, useValue: 'fr-FR'},
+
+    AuthenticationService,
   ],
 
   bootstrap: [

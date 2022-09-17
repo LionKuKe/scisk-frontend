@@ -105,7 +105,7 @@
         </div>
       </div>
 
-      <div ngbDropdown [placement]="isRTL ? 'bottom-left' : 'bottom-right'" class="demo-navbar-messages nav-item mr-lg-3">
+      <!--div ngbDropdown [placement]="isRTL ? 'bottom-left' : 'bottom-right'" class="demo-navbar-messages nav-item mr-lg-3">
         <a ngbDropdownToggle class="nav-link hide-arrow" href="javascript:void(0)">
           <i class="ion ion-ios-mail navbar-icon align-middle"></i>
           <span class="badge badge-primary badge-dot indicator"></span>
@@ -159,7 +159,7 @@
 
           <a href="javascript:void(0)" class="d-block text-center text-light small p-2 my-1">Show all messages</a>
         </div>
-      </div>
+      </div-->
 
       <!-- Divider -->
       <div class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">|</div>
@@ -167,16 +167,15 @@
       <div ngbDropdown [placement]="isRTL ? 'bottom-left' : 'bottom-right'" class="demo-navbar-user nav-item">
         <a ngbDropdownToggle class="nav-link" href="javascript:void(0)">
           <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
-            <img src="assets/img/avatars/1.png" alt class="d-block ui-w-30 rounded-circle">
-            <span class="px-1 mr-lg-2 ml-2 ml-lg-0">Mike Greene</span>
+            <span class="px-1 mr-lg-2 ml-2 ml-lg-0">{{currentUser.firstname + ' ' + currentUser.lastname}}</span>
           </span>
         </a>
         <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
-          <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-person text-lightest"></i> &nbsp; My profile</a>
-          <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-mail text-lightest"></i> &nbsp; Messages</a>
-          <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-md-settings text-lightest"></i> &nbsp; Account settings</a>
+          <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-person text-lightest"></i> &nbsp; Mon profil</a>
+          <!--a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-mail text-lightest"></i> &nbsp; Messages</a>
+          <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-md-settings text-lightest"></i> &nbsp; Account settings</a-->
           <div class="dropdown-divider"></div>
-          <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; Log Out</a>
+          <a href="javascript:void(0)" (click)="logout()"  class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; Déconnecter</a>
         </div>
       </div>
     </div>
